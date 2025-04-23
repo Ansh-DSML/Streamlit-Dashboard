@@ -252,5 +252,29 @@ elif option == "View Raw Data Dashboard":
 
 # ========== PREDICTED CHURN PLACEHOLDER ==========
 elif option == "View Predicted Churn Customers Dashboard":
-    st.subheader("🧠 Predicted Churn Customers (Coming Soon)")
+    st.subheader("🧠 Predicted Churn Customers")
     st.info("This section will show predictions based on ML models.")
+
+    st.markdown("### 💳 Customer Count by Payment Method (Predicted)")
+
+    # Static data extracted from image
+    payment_methods = ["Credit Card", "Bank Withdrawal", "Mailed Check"]
+    customer_counts = [190, 150, 40]
+
+    fig, ax = plt.subplots(figsize=(6, 4))
+    bars = ax.bar(payment_methods, customer_counts, color="#40a4ff", edgecolor='black')
+
+    # Add value labels
+    for bar in bars:
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2, height + 5, f'{height}', ha='center', fontsize=9)
+
+    ax.set_title("# by Payment Method", fontsize=14, fontweight='bold')
+    ax.set_ylabel("Count of Customer_ID")
+    ax.set_xlabel("Payment_Method")
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    plt.tight_layout()
+
+    st.pyplot(fig)
